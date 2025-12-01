@@ -21,5 +21,7 @@ Terraform module for configuring HCP Vault Secrets Sync
 Requires an AWS keypair to be set as environment variables during the initial setup/ refresh of configuration once keys expire
 
 Workspace Environment Variables
+```
      AWS_ACCESS_KEY_ID
      AWS_SECRET_ACCESS_KEY
+```
