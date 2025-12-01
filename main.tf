@@ -1,5 +1,6 @@
 resource "vault_secrets_sync_aws_destination" "aws" {
   name                 = "aws-secrets-sync-${var.name}-${var.env}"
+  region               = data.aws_region.current.region
   role_arn             = var.role_arn
   secret_name_template = "vault_${var.name}-{{ .MountAccessor | lowercase }}_{{ .SecretPath | lowercase }}"
   custom_tags = merge(

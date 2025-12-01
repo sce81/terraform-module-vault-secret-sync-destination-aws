@@ -6,3 +6,5 @@ locals {
     "Terraform"   = "true"
   }
 }
+
+data "aws_region" "current" {}
