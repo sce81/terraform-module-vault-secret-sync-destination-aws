@@ -12,7 +12,7 @@ resource "vault_secrets_sync_aws_destination" "aws" {
 }
 
 
-resource "vault_kv_secret_v2" "db_secret" {
+resource "vault_kv_secret_v2" "main" {
   mount    = var.mount
   //mount_id = var.mount_id
   name     = "${var.name}-${var.env}-secrets-sync"
@@ -28,4 +28,12 @@ ephemeral "random_password" "main" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+
+resource "vault_secrets_sync_association" "main" {
+  name        = vault_secrets_sync_aws_destination.aws.name
+  type        = vault_secrets_sync_aws_destination.aws.type
+  mount       = var.mount
+  secret_name = vault_kv_secret_v2.main.name
 }
